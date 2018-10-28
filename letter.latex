@@ -1,0 +1,115 @@
+ \documentclass[
+  fontsize=10pt,       % Font size
+  paper=a4,            % Paper size
+  DIV=15,              % Dynamically adjust the page margins
+  parskip=full,        % Insert an empty line for each paragraph
+  addrfield=on,        % Show the address field
+  backaddress=on,      % Show the small sender address above the receiver
+  firsthead=false,     % Disable the header (the sender information are not
+                       % showed twice)
+  foldmarks=on,        % Enable the helpful fold marks
+  pagenumber=botright, % Show the page number in the bottom right corner
+                       % (online if there are 2+ pages)
+  numericaldate,       % Show the date in a numerical format (DD.MM.YYYY)
+  backaddress=plain    % Don't show a rule below the sender address
+]{scrlttr2}
+ 
+\usepackage[german]{babel}                % Use German language
+\usepackage[utf8]{inputenc}               % Set encoding to UTF-8
+\usepackage{graphicx}                     % Enable including of images (needed
+                                          % for the signature)
+\usepackage[space]{grffile}               % Allow for spaces in file paths
+\usepackage[default,scale=0.95]{opensans} % Set font to Open-Sans
+\usepackage[T1]{fontenc}                  % Set font encoding
+\usepackage{eurosym}                      % Enable € symbols
+\usepackage{url}                          % Enable URLs
+
+% ============================================================================
+% Sender information (KEYWORD: from)
+% ============================================================================
+$if(from)$
+  $for(from)$
+    $if(from.name)$
+      \setkomavar{fromname}{$from.name$} 
+    $endif$
+    $if(from.address)$
+      \setkomavar{fromaddress}{$from.address$} 
+    $endif$
+  $endfor$
+$endif$
+
+% ============================================================================
+% Place and custom date information (KEYWORDS: place, date)
+% If no date is supplied, the current date is used.
+% ============================================================================
+$if(place)$
+  \setkomavar{place}{$place$}
+$endif$
+$if(date)$
+  \setkomavar{date}{$date$}
+$endif$
+
+% ============================================================================
+% Subject (KEYWORD: subject)
+% ============================================================================
+$if(subject)$
+  \setkomavar{subject}{\large $subject$}
+$endif$
+
+% ============================================================================
+% Signature (KEYWORD: signature)
+% If no path a signature image is provided, only the name of the sender is
+% rendered.
+% NOTICE: The filename must only include alpha-numerical characters (and
+% spaces).
+% ============================================================================
+\setkomavar{signature}{
+  \begin{picture}(100,50)
+    $if(signature)$
+      \put(-6,0){\includegraphics[width=5cm]{$signature$}}
+      \put(-6,10){\usekomavar{fromname}}
+    $else$
+      \put(-4,30){\usekomavar{fromname}}
+    $endif$
+  \end{picture}
+}
+
+\begin{document}
+  \begin{letter}{
+    $if(to)$
+      $for(to)$
+        $if(to.company)$
+          {\fontseries{r}\selectfont $to.company$}\\
+        $endif$
+        $if(to.name)$
+          {\fontseries{r}\selectfont $to.name$}\\
+        $endif$
+        $if(to.street)$
+          $to.street$\\
+        $endif$
+        $if(to.town)$
+          $to.town$
+        $endif$
+      $endfor$
+    $endif$
+  }
+
+  {\fontseries{l}\selectfont{
+    % Redefine bold command to be rendered in regular width
+    \renewcommand{\textbf}[1]{{\fontseries{r}\selectfont #1}}
+
+    $if(opening)$
+      \opening{$opening$}
+    $endif$
+
+    $body$
+
+    $if(closing)$
+      \closing{$closing$}
+    $else$
+      \closing{Mit freundlichen Grüßen}
+    $endif$
+  }
+}
+\end{letter}
+\end{document}
