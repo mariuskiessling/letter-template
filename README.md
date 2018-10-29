@@ -1,5 +1,9 @@
 # A letter template in LaTeX (using scrlttr2) that can be used with pandoc
 
+This project does not try to implement all features provided by the scrlttr2
+package but rather give you a template that is usable on a personal day to day
+basis.
+
 ## Setup
 1. Install [pandoc](https://pandoc.org/) for your platform.
 2. Place the `letter.latex` file inside the `~/.pandoc/templates` directory
