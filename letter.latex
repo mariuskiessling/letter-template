@@ -107,6 +107,7 @@ $endif$
       \vskip -2cm
       \includegraphics[height=1.8cm]{$signature$}
       \vskip -0.8cm
+      \usekomavar{fromname}
     $else$
       \vskip -1cm
       \usekomavar{fromname}
