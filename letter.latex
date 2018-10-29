@@ -56,23 +56,9 @@ $if(subject)$
   \setkomavar{subject}{\large $subject$}
 $endif$
 
-% ============================================================================
-% Signature (KEYWORD: signature)
-% If no path a signature image is provided, only the name of the sender is
-% rendered.
-% NOTICE: The filename must only include alpha-numerical characters (and
-% spaces).
-% ============================================================================
-\setkomavar{signature}{
-  \begin{picture}(100,50)
-    $if(signature)$
-      \put(-6,0){\includegraphics[width=5cm]{$signature$}}
-      \put(-6,10){\usekomavar{fromname}}
-    $else$
-      \put(-4,30){\usekomavar{fromname}}
-    $endif$
-  \end{picture}
-}
+\setkomavar{signature}{} % We will not use the provided signature variable
+                         % because of its odd placement rules. The actual
+                         % signature will be inserted below the closing tag.
 
 \begin{document}
   \begin{letter}{
@@ -108,6 +94,22 @@ $endif$
       \closing{$closing$}
     $else$
       \closing{Mit freundlichen Grüßen}
+    $endif$
+
+    % ========================================================================
+    % Signature (KEYWORD: signature)
+    % If no path a signature image is provided, only the name of the sender is
+    % rendered.
+    % NOTICE: The filename must only include alpha-numerical characters (and
+    % spaces).
+    % ========================================================================
+    $if(signature)$
+      \vskip -2cm
+      \includegraphics[height=1.8cm]{$signature$}
+      \vskip -0.8cm
+    $else$
+      \vskip -1cm
+      \usekomavar{fromname}
     $endif$
   }
 }
