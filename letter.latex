@@ -15,7 +15,7 @@
 ]{scrlttr2}
  
 \usepackage[german]{babel}                % Use German language
-\usepackage[utf8]{inputenc}               % Set encoding to UTF-8
+\usepackage[utf8x]{inputenc}              % Set encoding to UTF-8
 \usepackage{graphicx}                     % Enable including of images (needed
                                           % for the signature)
 \usepackage[space]{grffile}               % Allow for spaces in file paths
