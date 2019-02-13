@@ -85,13 +85,17 @@ $endif$
     \renewcommand{\textbf}[1]{{\fontseries{r}\selectfont #1}}
 
     $if(opening)$
-      \opening{$opening$}
+      \begin{flushleft}
+        \opening{$opening$}
+      \end{flushleft}
     $endif$
 
     $body$
 
     $if(closing)$
-      \closing{$closing$}
+      \begin{flushleft}
+        \closing{$closing$}
+      \end{flushleft}
     $else$
       \closing{Mit freundlichen Grüßen}
     $endif$
